@@ -1,6 +1,7 @@
 origin_data/*.txt
 origin_data/*.csv
 origin_data/*.data
+origin_data/*.json
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
