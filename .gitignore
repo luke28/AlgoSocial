@@ -1,3 +1,7 @@
+origin_data/*.txt
+origin_data/*.csv
+origin_data/*.data
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
