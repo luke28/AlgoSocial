@@ -10,7 +10,10 @@ def main():
     args = parser.parse_args()
     input_file = os.path.join(ORIGIN_DATA_PATH, args.input_file)
     output_file = input_file + ".json"
-    data = []
+    #data = []
+    out_f = open(output_file, "w")
+    out_f.write('[')
+    cnt = 0
     with open(input_file, "r") as f:
         for line in f:
             line = line.strip()
@@ -31,8 +34,16 @@ def main():
                     dic[its[0]] = []
                     for it in its[1:]:
                         dic[its[0]].append(int(it))
-            data.append(dic)
-    with open(output_file, "w") as f:
-        f.write(json.dumps(data))
+            if cnt > 0:
+                out_f.write(',')
+            out_f.write(json.dumps(dic))
+            cnt += 1
+            if cnt % 10000 == 0:
+                print("finished " + str(cnt))
+            #data.append(dic)
+    #with open(output_file, "w") as f:
+    #    f.write(json.dumps(data))
+    out_f.write("]")
+    out_f.close()
 if __name__ == "__main__":
     main()
