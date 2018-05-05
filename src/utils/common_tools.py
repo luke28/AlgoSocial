@@ -9,18 +9,14 @@ from datetime import datetime
 from Queue import Queue
 from sklearn.preprocessing import MultiLabelBinarizer
 
-class DataHandler(object):
+class CommonTools(object):
     @staticmethod
-    def user_feature_info_extract(user_feature_conf):
-        user_feature_info = {}
-        order_list = user_feature_conf["columns_order"]
-        user_feature_info["feature_order_list"] = order_list
-        #order_dict = {order_list[i] : i for i in xrange(len(order_list))}
-        #user_feature_info["feature_order_dict"] = order_dict
-        user_feature_info["feature_info"] = user_feature_conf["features"]
-        return user_feature_info
+    def dict_add(d, key, add):
+        if key in d:
+            d[key] += add
+        else:
+            d[key] = add
 
-    # Previous
     @staticmethod
     def load_fea(file_path):
         X = []
@@ -33,6 +29,31 @@ class DataHandler(object):
                 X.append([float(item) for item in items])
         return np.array(X)
 
+
+    @staticmethod
+    def symlink(src, dst):
+        try:
+            os.symlink(src, dst)
+        except OSError:
+            os.remove(dst)
+            os.symlink(src, dst)
+
+
+    @staticmethod
+    def load_json_file(file_path):
+        with open(file_path, "r") as f:
+            s = f.read()
+            s = re.sub('\s',"", s)
+        return json.loads(s)
+
+    @staticmethod
+    def get_time_str():
+        return datetime.now().strftime("%Y-%m-%d-%H:%M:%S.%f")
+
+    @staticmethod
+    def append_to_file(file_path, s):
+        with open(file_path, "a") as f:
+            f.write(s)
 
     @staticmethod
     def load_ground_truth(file_path):

@@ -1,0 +1,40 @@
+{
+    "static_info" : {
+        "random_seed": 157,
+        "np_seed": 213,
+        "user_feature_conf": "user_features.json"
+    },
+    "run_modules":[
+        {
+            "func" : "user_feature_extract",
+            "params": {
+                "func" : "Vw2Csv",
+                "input_file" : "userFeature_test",
+                "start_line" : 2,
+                "end_line": 5,
+                "default": "NaN",
+                "feature_merge": {
+                    "interest1" : "interest",
+                    "interest2" : "interest",
+                    "interest3" : "interest",
+                    "interest4" : "interest",
+                    "interest5" : "interest"
+                },
+                "feature_reservation":{
+                    "education": {
+                        "is_one_hot" : true,
+                        "order": 1
+                    },
+                    "interest": {
+                        "is_one_hot" : true,
+                        "order": 2
+                    },
+                    "uid" : {
+                        "is_one_hot" : false,
+                        "order": 0
+                    }
+                }
+            }
+        }
+    ]
+}
