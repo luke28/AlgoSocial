@@ -78,4 +78,10 @@ def user_feature_extract(params, static_info):
                 else:
                     res[cnt - st + 1][feas_rsv[key]["st"]] = float(its[1])
             cnt += 1
-    np.savetxt(os.path.join(static_info['res_path'], 'user_features_' + static_info["time_str"] + ".csv"), res, delimiter = ',')
+    file_path = os.path.join(static_info['res_path'], 'user_features_' + static_info["time_str"] + ".csv")
+    np.savetxt(
+            fname = file_path,
+            X = res,
+            fmt = '%.2f',
+            delimiter = ',')
+    ct.symlink(file_path, os.path.join(static_info['res_path'], 'new_user_features'))
